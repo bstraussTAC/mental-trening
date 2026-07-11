@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f2a2e;
+
+  /* Turquoise brand ramp */
+  --tq-50: #effcfa;
+  --tq-100: #c8f7f0;
+  --tq-200: #92eee2;
+  --tq-300: #54ddd0;
+  --tq-400: #26c4b9;
+  --tq-500: #0da8a0;
+  --tq-600: #078782;
+  --tq-700: #0a6c69;
+  --tq-800: #0c5654;
+  --tq-900: #0f4746;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-tq-50: var(--tq-50);
+  --color-tq-100: var(--tq-100);
+  --color-tq-200: var(--tq-200);
+  --color-tq-300: var(--tq-300);
+  --color-tq-400: var(--tq-400);
+  --color-tq-500: var(--tq-500);
+  --color-tq-600: var(--tq-600);
+  --color-tq-700: var(--tq-700);
+  --color-tq-800: var(--tq-800);
+  --color-tq-900: var(--tq-900);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes breathe-in {
+  from {
+    transform: scale(0.55);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes breathe-out {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.55);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out both;
+}
