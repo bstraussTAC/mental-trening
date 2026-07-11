@@ -15,17 +15,17 @@ export default function Focus() {
   useEffect(() => {
     if (!running) return;
     const id = setInterval(() => {
-      setSecondsLeft((s) => {
-        if (s <= 1) {
-          setRunning(false);
-          setDone(true);
-          return 0;
-        }
-        return s - 1;
-      });
+      setSecondsLeft((s) => Math.max(0, s - 1));
     }, 1000);
     return () => clearInterval(id);
   }, [running]);
+
+  useEffect(() => {
+    if (running && secondsLeft === 0) {
+      setRunning(false);
+      setDone(true);
+    }
+  }, [running, secondsLeft]);
 
   const start = () => {
     setSecondsLeft(DURATION);
@@ -46,7 +46,7 @@ export default function Focus() {
           </p>
           <button
             onClick={start}
-            className="rounded-full bg-tq-500 px-8 py-3 font-semibold text-white transition-colors hover:bg-tq-600"
+            className="rounded-full bg-tq-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-tq-700"
           >
             {t({ en: "Start 60 seconds", no: "Start 60 sekunder" })}
           </button>
@@ -60,9 +60,10 @@ export default function Focus() {
           </p>
           <button
             onClick={() => setTaps((n) => n + 1)}
+            aria-label={t({ en: "Tap on every exhale", no: "Trykk for hver utpust" })}
             className="flex h-44 w-44 select-none items-center justify-center rounded-full bg-tq-100 text-4xl font-bold text-tq-700 transition-transform active:scale-95"
           >
-            {taps}
+            <span aria-hidden>{taps}</span>
           </button>
           <p className="text-sm text-slate-400">
             {t({ en: "Tap on every exhale", no: "Trykk for hver utpust" })}
@@ -72,7 +73,7 @@ export default function Focus() {
 
       {done && (
         <>
-          <p className="text-lg font-semibold text-tq-800">
+          <p aria-live="polite" className="text-lg font-semibold text-tq-800">
             {t({ en: "60 seconds — done!", no: "60 sekunder — ferdig!" })}
           </p>
           <p className="max-w-md text-sm text-slate-500">
@@ -83,7 +84,7 @@ export default function Focus() {
           </p>
           <button
             onClick={start}
-            className="rounded-full bg-tq-500 px-8 py-3 font-semibold text-white transition-colors hover:bg-tq-600"
+            className="rounded-full bg-tq-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-tq-700"
           >
             {t({ en: "Go again", no: "En gang til" })}
           </button>

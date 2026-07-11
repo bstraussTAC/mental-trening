@@ -15,14 +15,14 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6">
-      <section className="rounded-3xl bg-gradient-to-br from-tq-500 to-tq-700 p-6 text-white">
+      <section className="rounded-3xl bg-gradient-to-br from-tq-600 to-tq-700 p-6 text-white">
         <h1 className="text-2xl font-bold leading-snug">
           {t({
             en: "Train your head like you train your body",
             no: "Tren hodet som du trener kroppen",
           })}
         </h1>
-        <p className="mt-2 text-sm text-tq-100">
+        <p className="mt-2 text-sm text-white/90">
           {t({
             en: "Beginner mental training for young athletes — built on peer-reviewed sport psychology, not random internet advice.",
             no: "Grunnleggende mental trening for unge utøvere — bygget på fagfellevurdert idrettspsykologi, ikke tilfeldige råd fra nettet.",
@@ -35,7 +35,7 @@ export default function Home() {
           {doneCount === 0
             ? t({ en: "Start lesson 1", no: "Start leksjon 1" })
             : doneCount === LESSONS.length
-              ? t({ en: "Review lessons", no: "Repeter leksjoner" })
+              ? t({ en: "Review lessons", no: "Repeter leksjonene" })
               : t({ en: "Continue training", no: "Fortsett treningen" })}
         </Link>
       </section>
@@ -49,9 +49,16 @@ export default function Home() {
             {doneCount}/{LESSONS.length} {t({ en: "lessons", no: "leksjoner" })}
           </span>
         </div>
-        <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-tq-50">
+        <div
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={LESSONS.length}
+          aria-valuenow={doneCount}
+          aria-label={t({ en: "Lessons completed", no: "Fullførte leksjoner" })}
+          className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-tq-50"
+        >
           <div
-            className="h-full rounded-full bg-tq-500 transition-all duration-500"
+            className="h-full rounded-full bg-tq-600 transition-all duration-500"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -105,7 +112,7 @@ export default function Home() {
       <p className="rounded-2xl bg-slate-50 px-4 py-3 text-xs leading-relaxed text-slate-500">
         {t({
           en: "This app teaches performance skills — it is not medical advice or therapy. If you're struggling with how you feel, talk to a parent, coach, school nurse or doctor.",
-          no: "Denne appen lærer bort prestasjonsferdigheter — den er ikke medisinsk hjelp eller terapi. Hvis du sliter med hvordan du har det, snakk med en forelder, trener, helsesykepleier eller lege.",
+          no: "Denne appen lærer bort prestasjonsferdigheter — den gir ikke medisinske råd og er ikke terapi. Hvis du sliter med hvordan du har det, snakk med en forelder, trener, helsesykepleier eller lege.",
         })}
       </p>
     </div>

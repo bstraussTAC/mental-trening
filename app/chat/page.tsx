@@ -46,6 +46,19 @@ export default function ChatPage() {
     return () => abortRef.current?.abort();
   }, []);
 
+  // Drop a dangling empty assistant bubble left behind if the page was
+  // closed mid-stream.
+  useEffect(() => {
+    if (!loaded) return;
+    setMessages((prev) => {
+      const last = prev[prev.length - 1];
+      return last && last.role === "assistant" && !last.content.trim()
+        ? prev.slice(0, -1)
+        : prev;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded]);
+
   const send = async (text: string) => {
     const trimmed = text.trim();
     if (!trimmed || busy) return;
@@ -79,14 +92,23 @@ export default function ChatPage() {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let acc = "";
-      for (;;) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        acc += decoder.decode(value, { stream: true });
-        const current = acc;
-        setMessages([...history, { role: "assistant", content: current }]);
+      try {
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          acc += decoder.decode(value, { stream: true });
+          const current = acc;
+          setMessages([...history, { role: "assistant", content: current }]);
+        }
+        acc += decoder.decode();
+      } catch {
+        if (!controller.signal.aborted) setError("generic");
       }
-      if (!acc.trim()) {
+      // Keep whatever streamed before an interruption; only roll back if
+      // nothing arrived at all.
+      if (acc.trim()) {
+        setMessages([...history, { role: "assistant", content: acc }]);
+      } else {
         setMessages(history);
         setError("generic");
       }
@@ -118,7 +140,7 @@ export default function ChatPage() {
         </p>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3">
+      <div className="flex flex-1 flex-col gap-3" role="log" aria-live="polite">
         {loaded && messages.length === 0 && (
           <div className="flex flex-col gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
@@ -139,9 +161,9 @@ export default function ChatPage() {
         {messages.map((message, i) => (
           <div
             key={i}
-            className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+            className={`max-w-[85%] whitespace-pre-wrap break-words rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
               message.role === "user"
-                ? "self-end bg-tq-500 text-white"
+                ? "self-end bg-tq-600 text-white"
                 : "self-start bg-tq-50 text-slate-800"
             }`}
           >
@@ -159,7 +181,7 @@ export default function ChatPage() {
         ))}
 
         {error === "config" && (
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+          <div role="alert" className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
             {t({
               en: "The coach isn't connected yet: the app needs an ANTHROPIC_API_KEY environment variable on the server. Ask whoever runs the app to add it.",
               no: "Coachen er ikke koblet til ennå: appen trenger miljøvariabelen ANTHROPIC_API_KEY på serveren. Be den som drifter appen om å legge den inn.",
@@ -167,7 +189,7 @@ export default function ChatPage() {
           </div>
         )}
         {error === "generic" && (
-          <div className="rounded-2xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <div role="alert" className="rounded-2xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700">
             {t({
               en: "Something went wrong. Try again in a moment.",
               no: "Noe gikk galt. Prøv igjen om litt.",
@@ -177,26 +199,26 @@ export default function ChatPage() {
         <div ref={bottomRef} />
       </div>
 
-      <div className="sticky bottom-20 flex flex-col gap-2">
-        <div className="flex gap-2 rounded-full border border-tq-200 bg-white p-1.5 shadow-sm">
+      <div className="sticky bottom-[calc(5rem+env(safe-area-inset-bottom))] flex flex-col gap-2">
+        <div className="flex gap-2 rounded-full border border-tq-200 bg-white p-1.5 shadow-sm transition-colors focus-within:border-tq-600">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            aria-label={t({ en: "Message the coach", no: "Melding til coachen" })}
             onKeyDown={(e) => {
-              if (e.key === "Enter") send(input);
+              if (e.key === "Enter" && !e.nativeEvent.isComposing) send(input);
             }}
             placeholder={t({
               en: "Ask about nerves, focus, confidence...",
               no: "Spør om nerver, fokus, selvtillit ...",
             })}
-            disabled={busy}
-            className="flex-1 bg-transparent px-3 text-sm outline-none disabled:opacity-50"
+            className="flex-1 bg-transparent px-3 text-sm outline-none"
           />
           <button
             onClick={() => send(input)}
             disabled={busy || !input.trim()}
-            className="rounded-full bg-tq-500 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-tq-600 disabled:opacity-40"
+            className="rounded-full bg-tq-600 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-tq-700 disabled:opacity-40"
           >
             {t({ en: "Send", no: "Send" })}
           </button>
@@ -204,10 +226,19 @@ export default function ChatPage() {
         {messages.length > 0 && !busy && (
           <button
             onClick={() => {
-              setMessages([]);
-              setError(null);
+              if (
+                window.confirm(
+                  t({
+                    en: "Delete the whole conversation?",
+                    no: "Slette hele samtalen?",
+                  }),
+                )
+              ) {
+                setMessages([]);
+                setError(null);
+              }
             }}
-            className="self-center text-xs text-slate-400 hover:text-slate-600"
+            className="self-center px-3 py-2 text-xs text-slate-500 hover:text-slate-700"
           >
             {t({ en: "Clear conversation", no: "Tøm samtalen" })}
           </button>

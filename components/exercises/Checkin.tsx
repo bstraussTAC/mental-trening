@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useT, type L10n } from "@/lib/i18n";
 import { useLocalStorage } from "@/lib/progress";
 
@@ -15,13 +15,22 @@ const SKILLS: { key: string; label: L10n }[] = [
 
 export default function Checkin() {
   const t = useT();
-  const [history, setHistory] = useLocalStorage<Snapshot[]>("mt-checkin", []);
+  const [history, setHistory, loaded] = useLocalStorage<Snapshot[]>(
+    "mt-checkin",
+    [],
+  );
   const [values, setValues] = useState<Record<string, number>>(
     Object.fromEntries(SKILLS.map((s) => [s.key, 5])),
   );
   const [saved, setSaved] = useState(false);
+  // Snapshot from before this visit, so "Last time" doesn't show what the
+  // user just saved.
+  const [previous, setPrevious] = useState<Snapshot | null>(null);
 
-  const previous = history[history.length - 1];
+  useEffect(() => {
+    if (loaded) setPrevious(history[history.length - 1] ?? null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded]);
 
   const save = () => {
     setHistory((prev) => [
@@ -61,17 +70,17 @@ export default function Checkin() {
       <button
         onClick={save}
         disabled={saved}
-        className="rounded-full bg-tq-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-tq-600 disabled:opacity-50"
+        className="rounded-full bg-tq-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-tq-700 disabled:opacity-50"
       >
         {saved
           ? t({ en: "Saved ✓", no: "Lagret ✓" })
-          : t({ en: "Save check-in", no: "Lagre sjekk-inn" })}
+          : t({ en: "Save check-in", no: "Lagre innsjekk" })}
       </button>
       {saved && (
         <p className="text-sm text-tq-700">
           {t({
             en: "Nice. Come back after a few weeks of lessons and see how these numbers move.",
-            no: "Flott. Kom tilbake etter noen uker med leksjoner og se hvordan tallene flytter seg.",
+            no: "Flott. Kom tilbake etter noen uker med leksjoner og se hvordan tallene har endret seg.",
           })}
         </p>
       )}

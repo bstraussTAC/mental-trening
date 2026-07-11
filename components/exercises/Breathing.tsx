@@ -60,14 +60,14 @@ export default function Breathing() {
         : t({ en: "Breathe out...", no: "Pust ut ..." })
     : done
       ? t({ en: "Well done! Notice how your body feels.", no: "Bra jobba! Kjenn etter hvordan kroppen føles." })
-      : t({ en: "Ready when you are", no: "Klar når du er" });
+      : t({ en: "Ready when you are", no: "Start når du er klar" });
 
   return (
     <div className="flex flex-col items-center gap-6 py-4">
       <div className="relative flex h-56 w-56 items-center justify-center">
         <div className="absolute inset-0 rounded-full bg-tq-50" />
         <div
-          className="absolute inset-4 rounded-full bg-tq-200/70"
+          className="absolute inset-4 rounded-full bg-tq-200/70 motion-reduce:transition-none"
           style={{
             transform: `scale(${running ? phase.scale : 0.55})`,
             transition: running
@@ -75,7 +75,7 @@ export default function Breathing() {
               : "transform 0.5s ease-in-out",
           }}
         />
-        <div className="relative z-10 text-center">
+        <div className="relative z-10 text-center" aria-live="assertive">
           <p className="text-lg font-semibold text-tq-800">{label}</p>
           {running && (
             <p className="mt-1 text-sm text-tq-600">
@@ -94,7 +94,7 @@ export default function Breathing() {
       ) : (
         <button
           onClick={start}
-          className="rounded-full bg-tq-500 px-8 py-3 font-semibold text-white transition-colors hover:bg-tq-600"
+          className="rounded-full bg-tq-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-tq-700"
         >
           {done
             ? t({ en: "Go again", no: "En gang til" })

@@ -38,6 +38,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     window.localStorage.setItem(STORAGE_KEY, next);
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = lang === "no" ? "nb" : "en";
+  }, [lang]);
+
   return (
     <LangContext.Provider value={{ lang, setLang }}>
       {children}

@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 
 export const metadata: Metadata = {
-  title: "Mental Training — for young athletes",
+  title: "Mental Trening — mental training for young athletes",
   description:
     "Beginner mental training for young athletes: science-backed lessons, exercises, and an AI coach grounded in peer-reviewed sport psychology research.",
 };

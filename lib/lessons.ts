@@ -50,7 +50,7 @@ export const LESSONS: Lesson[] = [
     minutes: 6,
     intro: {
       en: "You already train your legs, your lungs and your technique. Mental training means practicing the skills in your head — focus, confidence, staying calm — the same way: a little at a time, over and over. Nobody is just \"born with\" a strong mindset. It's built.",
-      no: "Du trener allerede bein, lunger og teknikk. Mental trening betyr å øve på ferdighetene i hodet — fokus, selvtillit, å holde seg rolig — på samme måte: litt om gangen, om og om igjen. Ingen er bare «født med» et sterkt hode. Det bygges.",
+      no: "Du trener allerede bein, lunger og teknikk. Mental trening betyr å øve på ferdighetene i hodet — fokus, selvtillit, å holde seg rolig — på samme måte: litt om gangen, om og om igjen. Ingen er bare «født» sterk i hodet. Det bygges.",
     },
     science: {
       en: "Research on athletes shows that mental skills like goal setting, self-talk and imagery can be learned, and that practicing them is linked to better performance and better wellbeing. Sports medicine organizations also remind us that athletes get stressed, nervous and low sometimes — that's normal, and asking for support is a strength, not a weakness.",
@@ -80,7 +80,7 @@ export const LESSONS: Lesson[] = [
       },
     ],
     exercise: "checkin",
-    exerciseTitle: { en: "Mental skills check-in", no: "Mental sjekk-inn" },
+    exerciseTitle: { en: "Mental skills check-in", no: "Mental innsjekk" },
     exerciseIntro: {
       en: "Rate where you are today. There are no wrong answers — this is your starting point, and you can come back later to see how you've grown.",
       no: "Vurder hvor du er i dag. Det finnes ingen gale svar — dette er startpunktet ditt, og du kan komme tilbake senere og se hvordan du har utviklet deg.",
@@ -137,7 +137,7 @@ export const LESSONS: Lesson[] = [
         heading: { en: "Write it down, check it weekly", no: "Skriv det ned, sjekk det ukentlig" },
         body: {
           en: "A goal in your head is easy to forget or quietly abandon. Written goals that you review every week keep you honest — and let you celebrate progress you'd otherwise miss. Adjust goals when life changes; abandoning a goal on purpose is fine, drifting away from it isn't.",
-          no: "Et mål i hodet er lett å glemme eller stille forlate. Nedskrevne mål som du ser over hver uke, holder deg ærlig — og lar deg feire framgang du ellers ville oversett. Juster målene når livet endrer seg; å droppe et mål med vilje er greit, å skli bort fra det er det ikke.",
+          no: "Et mål i hodet er lett å glemme — eller forlate i det stille. Nedskrevne mål som du ser over hver uke, holder deg ærlig — og lar deg feire framgang du ellers ville oversett. Juster målene når livet endrer seg; å droppe et mål med vilje er greit, å skli bort fra det er det ikke.",
         },
       },
     ],
@@ -174,7 +174,7 @@ export const LESSONS: Lesson[] = [
     minutes: 7,
     intro: {
       en: "Racing heart before a race? Butterflies before you step on court? That's your body getting ready to perform — but too much of it can make you tight and rushed. The fastest tool to dial it down is one you carry everywhere: your breath.",
-      no: "Hjertebank før et løp? Sommerfugler før du går på banen? Det er kroppen som gjør seg klar til å prestere — men for mye av det kan gjøre deg stiv og stressa. Det raskeste verktøyet for å skru det ned har du alltid med deg: pusten.",
+      no: "Hjertebank før et løp? Sommerfugler i magen før du går på banen? Det er kroppen som gjør seg klar til å prestere — men for mye av det kan gjøre deg stiv og stressa. Det raskeste verktøyet for å skru det ned har du alltid med deg: pusten.",
     },
     science: {
       en: "Slow, deep breathing — especially with a long, relaxed exhale — activates the body's calming system (the parasympathetic nervous system) and lowers heart rate. Studies of slow-paced breathing in athletes link it to reduced anxiety and better recovery, which is why it's a standard tool in sport psychology.",
@@ -185,14 +185,14 @@ export const LESSONS: Lesson[] = [
         heading: { en: "Nerves aren't the enemy", no: "Nerver er ikke fienden" },
         body: {
           en: "The adrenaline that makes your heart pound also makes you faster and sharper. Top athletes don't feel zero nerves — they interpret them as readiness. The goal isn't to delete the feeling; it's to keep it at a level where you still play loose and think clearly.",
-          no: "Adrenalinet som får hjertet til å dunke, gjør deg også raskere og skarpere. Topputøvere føler ikke null nerver — de tolker dem som tegn på at kroppen er klar. Målet er ikke å slette følelsen, men å holde den på et nivå der du fortsatt spiller løst og tenker klart.",
+          no: "Adrenalinet som får hjertet til å dunke, gjør deg også raskere og skarpere. Topputøvere føler ikke null nerver — de tolker dem som tegn på at kroppen er klar. Målet er ikke å slette følelsen, men å holde den på et nivå der du fortsatt spiller avslappet og tenker klart.",
         },
       },
       {
         heading: { en: "The long exhale trick", no: "Trikset med lang utpust" },
         body: {
           en: "Breathe in through your nose for about 4 seconds, low into your belly. Pause briefly. Then breathe out slowly for about 6 seconds, like you're gently fogging a mirror. The exhale is where the calming happens — make it longer than the inhale. Four to six rounds is enough to feel a difference.",
-          no: "Pust inn gjennom nesa i cirka 4 sekunder, lavt ned i magen. Hold pusten et lite øyeblikk. Pust så rolig ut i cirka 6 sekunder, som om du dugger et speil forsiktig. Det er utpusten som roer — gjør den lengre enn innpusten. Fire til seks runder er nok til å kjenne forskjell.",
+          no: "Pust inn gjennom nesa i cirka 4 sekunder, lavt ned i magen. Hold pusten et lite øyeblikk. Pust så rolig ut i cirka 6 sekunder, som om du forsiktig puster dugg på et speil. Det er utpusten som roer — gjør den lengre enn innpusten. Fire til seks runder er nok til å kjenne forskjell.",
         },
       },
       {
@@ -204,7 +204,7 @@ export const LESSONS: Lesson[] = [
       },
     ],
     exercise: "breathing",
-    exerciseTitle: { en: "Guided calm breathing", no: "Guidet rolig pust" },
+    exerciseTitle: { en: "Guided calm breathing", no: "Guidet pusteøvelse" },
     exerciseIntro: {
       en: "Follow the circle: in for 4, hold for 2, out for 6. Six rounds — about one minute. Sit or stand relaxed, shoulders down.",
       no: "Følg sirkelen: inn i 4, hold i 2, ut i 6. Seks runder — omtrent ett minutt. Sitt eller stå avslappet, med senkede skuldre.",
@@ -240,7 +240,7 @@ export const LESSONS: Lesson[] = [
     },
     science: {
       en: "A large body of research, including meta-analyses across dozens of studies, shows that planned self-talk improves sport performance. Instructional self-talk (\"elbow high\", \"soft hands\") helps most with technique and precision, while motivational self-talk (\"you've got this\", \"strong finish\") helps with effort and endurance.",
-      no: "Mye forskning, inkludert metaanalyser av titalls studier, viser at planlagt indre dialog forbedrer idrettsprestasjon. Instruerende selvsnakk («høy albue», «myke hender») hjelper mest på teknikk og presisjon, mens motiverende selvsnakk («du klarer dette», «sterk avslutning») hjelper på innsats og utholdenhet.",
+      no: "Mye forskning, inkludert metaanalyser av titalls studier, viser at planlagt indre dialog (selvsnakk) forbedrer idrettsprestasjonen. Instruerende selvsnakk («høy albue», «myke hender») hjelper mest på teknikk og presisjon, mens motiverende selvsnakk («du klarer dette», «sterk avslutning») hjelper på innsats og utholdenhet.",
     },
     sections: [
       {
@@ -254,19 +254,19 @@ export const LESSONS: Lesson[] = [
         heading: { en: "Two kinds that work", no: "To typer som virker" },
         body: {
           en: "Instructional: short technical cues that point your focus at the right thing — \"see the ball\", \"quick feet\", \"long stride\". Motivational: fuel for effort — \"one more rep\", \"you're strong\", \"attack\". Pick words that are short, personal and believable. Slogans you don't believe in don't work.",
-          no: "Instruerende: korte tekniske stikkord som retter fokuset mot riktig ting — «se ballen», «raske føtter», «lange steg». Motiverende: drivstoff for innsats — «én til», «du er sterk», «angrip». Velg ord som er korte, personlige og troverdige. Slagord du ikke tror på, virker ikke.",
+          no: "Instruerende: korte tekniske stikkord som retter fokuset mot det riktige — «se ballen», «raske føtter», «lange steg». Motiverende: drivstoff for innsats — «én til», «du er sterk», «angrip». Velg ord som er korte, personlige og troverdige. Slagord du ikke tror på, virker ikke.",
         },
       },
       {
-        heading: { en: "The teammate test", no: "Lagkamerat-testen" },
+        heading: { en: "The teammate test", no: "Lagkamerattesten" },
         body: {
           en: "When the harsh voice shows up, run the teammate test: would I say this to my best friend after the same mistake? If not, rewrite it. \"I always choke\" becomes \"That one's gone — next play, low and hard.\" Some athletes get extra distance by using their own name: \"Okay Sara, breathe, you know this.\"",
-          no: "Når den strenge stemmen dukker opp, kjør lagkamerat-testen: ville jeg sagt dette til bestevennen min etter samme feil? Hvis ikke, skriv om. «Jeg roter det alltid til» blir «Den er borte — neste aksjon, lavt og hardt.» Noen utøvere får ekstra avstand ved å bruke sitt eget navn: «Okei Sara, pust, du kan dette.»",
+          no: "Når den strenge stemmen dukker opp, kjør lagkamerattesten: ville jeg sagt dette til bestevennen min etter samme feil? Hvis ikke, skriv om. «Jeg roter det alltid til» blir «Den er borte — neste aksjon, lavt og hardt.» Noen utøvere får ekstra avstand ved å bruke sitt eget navn: «Okei Sara, pust, du kan dette.»",
         },
       },
     ],
     exercise: "selftalk",
-    exerciseTitle: { en: "Reframe builder", no: "Omformulerings-verksted" },
+    exerciseTitle: { en: "Reframe builder", no: "Omformuleringsverksted" },
     exerciseIntro: {
       en: "Take a harsh thought you've actually had in sport, and rewrite it into something a good coach would say. Save your best lines — they become your script.",
       no: "Ta en streng tanke du faktisk har hatt i idretten, og skriv den om til noe en god trener ville sagt. Lagre de beste replikkene dine — de blir manuset ditt.",
@@ -282,7 +282,7 @@ export const LESSONS: Lesson[] = [
       },
       {
         en: "The teammate test: never say to yourself what you wouldn't say to a friend.",
-        no: "Lagkamerat-testen: aldri si til deg selv det du ikke ville sagt til en venn.",
+        no: "Lagkamerattesten: aldri si til deg selv det du ikke ville sagt til en venn.",
       },
     ],
   },
@@ -316,11 +316,11 @@ export const LESSONS: Lesson[] = [
         heading: { en: "Make it real", no: "Gjør det virkelig" },
         body: {
           en: "Rehearse in real time, not fast-forward. Stand or sit the way you would in the real moment. Wear or hold your gear if you can. Picture the venue you'll actually compete in. See it from inside your own eyes first — that's the view you'll have on game day.",
-          no: "Kjør gjennom i sanntid, ikke på spoling. Stå eller sitt slik du ville gjort i det virkelige øyeblikket. Bruk eller hold utstyret ditt hvis du kan. Se for deg arenaen du faktisk skal konkurrere i. Se det innenfra dine egne øyne først — det er utsikten du har på konkurransedagen.",
+          no: "Kjør gjennom i sanntid, ikke på hurtigspoling. Stå eller sitt slik du ville gjort i det virkelige øyeblikket. Bruk eller hold utstyret ditt hvis du kan. Se for deg arenaen du faktisk skal konkurrere i. Se det innenfra dine egne øyne først — det er slik du kommer til å se det på konkurransedagen.",
         },
       },
       {
-        heading: { en: "Rehearse the recovery too", no: "Øv på opphentingen også" },
+        heading: { en: "Rehearse the recovery too", no: "Øv på nullstillingen også" },
         body: {
           en: "Don't only visualize perfection. Imagine the serve that goes long — and then your calm reset and the next good serve. Rehearsing how you respond to mistakes builds a plan your brain can grab under pressure, so one error doesn't become three.",
           no: "Ikke visualiser bare det perfekte. Se for deg serven som går langt ut — og deretter din rolige nullstilling og neste gode serve. Å øve på hvordan du reagerer på feil, bygger en plan hjernen kan gripe til under press, sånn at én feil ikke blir til tre.",
@@ -331,7 +331,7 @@ export const LESSONS: Lesson[] = [
     exerciseTitle: { en: "Guided imagery rep", no: "Guidet visualisering" },
     exerciseIntro: {
       en: "A two-minute guided rehearsal of one skill you want to sharpen. Find a quiet spot, sit comfortably, and follow the steps.",
-      no: "En to-minutters guidet gjennomkjøring av én ferdighet du vil skjerpe. Finn et rolig sted, sitt godt, og følg stegene.",
+      no: "En guidet gjennomkjøring på to minutter av én ferdighet du vil skjerpe. Finn et rolig sted, sitt godt, og følg stegene.",
     },
     takeaways: [
       {
@@ -364,14 +364,14 @@ export const LESSONS: Lesson[] = [
     },
     science: {
       en: "Mindfulness-based programs designed for athletes (like MSPE and the MAC approach) have been tested in real teams. Reviews of these studies report improvements in attention, lower competition anxiety, and more \"flow\" — the locked-in feeling where performance comes easily. The core exercise is simple: focus on one anchor, notice when you drift, return without beating yourself up.",
-      no: "Mindfulness-programmer laget for utøvere (som MSPE og MAC-tilnærmingen) er testet på ekte lag. Oppsummeringer av disse studiene rapporterer bedre oppmerksomhet, mindre konkurranseangst og mer «flow» — den låste følelsen der prestasjonen kommer lett. Kjerneøvelsen er enkel: fokuser på ett ankerpunkt, merk når du glir vekk, vend tilbake uten å dømme deg selv.",
+      no: "Mindfulness-programmer laget for utøvere (som MSPE og MAC-tilnærmingen) er testet på ekte lag. Oppsummeringer av disse studiene rapporterer bedre oppmerksomhet, mindre konkurranseangst og mer «flow» — følelsen av å være helt i sonen, der prestasjonen kommer lett. Kjerneøvelsen er enkel: fokuser på ett ankerpunkt, merk når du glir vekk, vend tilbake uten å dømme deg selv.",
     },
     sections: [
       {
-        heading: { en: "The reset skill", no: "Nullstillings-ferdigheten" },
+        heading: { en: "The reset skill", no: "Nullstillingsferdigheten" },
         body: {
           en: "Dwelling on a mistake steals attention from the next play — and the next play is the only one you can still affect. Great competitors have a short memory on purpose: acknowledge the error, take one breath, pick a cue for what's next. Mistake, breath, next.",
-          no: "Å dvele ved en feil stjeler oppmerksomhet fra neste aksjon — og neste aksjon er den eneste du fortsatt kan påvirke. Gode konkurrenter har kort hukommelse med vilje: anerkjenn feilen, ta ett pust, velg et stikkord for det som kommer. Feil, pust, neste.",
+          no: "Å dvele ved en feil stjeler oppmerksomhet fra neste aksjon — og neste aksjon er den eneste du fortsatt kan påvirke. Gode konkurrenter har kort hukommelse med vilje: anerkjenn feilen, ta én pust, velg et stikkord for det som kommer. Feil, pust, neste.",
         },
       },
       {
@@ -390,10 +390,10 @@ export const LESSONS: Lesson[] = [
       },
     ],
     exercise: "focus",
-    exerciseTitle: { en: "One-minute focus rep", no: "Ett-minutts fokusøvelse" },
+    exerciseTitle: { en: "One-minute focus rep", no: "Fokusøvelse på ett minutt" },
     exerciseIntro: {
       en: "For 60 seconds, keep your attention on your breathing and tap once for every exhale. When your mind wanders (it will), just notice it and come back. The score isn't the point — the returning is.",
-      no: "I 60 sekunder: hold oppmerksomheten på pusten og trykk én gang for hver utpust. Når tankene vandrer (det gjør de), bare legg merke til det og kom tilbake. Poengsummen er ikke poenget — tilbakevendingen er.",
+      no: "I 60 sekunder: hold oppmerksomheten på pusten og trykk én gang for hver utpust. Når tankene vandrer (det gjør de), bare legg merke til det og kom tilbake. Poengsummen er ikke poenget — det er det å komme tilbake som er poenget.",
     },
     takeaways: [
       {
@@ -433,21 +433,21 @@ export const LESSONS: Lesson[] = [
         heading: { en: "Why routines beat nerves", no: "Hvorfor rutiner slår nerver" },
         body: {
           en: "Under pressure, your brain wants to think about everything at once: the score, the crowd, what happens if you miss. A routine replaces that chaos with a short, familiar checklist. Your body has done these steps a thousand times, so it relaxes into autopilot — exactly where well-trained skills live.",
-          no: "Under press vil hjernen tenke på alt på en gang: stillingen, publikum, hva som skjer hvis du bommer. En rutine erstatter kaoset med en kort, kjent sjekkliste. Kroppen har gjort disse stegene tusen ganger, så den slapper av inn i autopilot — akkurat der godt trente ferdigheter bor.",
+          no: "Under press vil hjernen tenke på alt på en gang: stillingen, publikum, hva som skjer hvis du bommer. En rutine erstatter kaoset med en kort, kjent sjekkliste. Kroppen har gjort disse stegene tusen ganger, så den slapper av og går på autopilot — akkurat der godt trente ferdigheter bor.",
         },
       },
       {
         heading: { en: "Build it from three parts", no: "Bygg den av tre deler" },
         body: {
           en: "A solid routine has: (1) a physical action that grounds you — bounce the ball, adjust your grip, roll your shoulders; (2) one calm breath; (3) a cue — one word or image that points your focus at the task: \"smooth\", \"low and hard\", \"through the target\". Keep the whole thing under 10 seconds.",
-          no: "En solid rutine har: (1) en fysisk handling som jorder deg — sprett ballen, juster grepet, rull skuldrene; (2) ett rolig pust; (3) et stikkord — ett ord eller bilde som retter fokuset mot oppgaven: «mykt», «lavt og hardt», «gjennom målet». Hold hele rutinen under 10 sekunder.",
+          no: "En solid rutine har: (1) en fysisk handling som jorder deg — sprett ballen, juster grepet, rull skuldrene; (2) én rolig pust; (3) et stikkord — ett ord eller bilde som retter fokuset mot oppgaven: «mykt», «lavt og hardt», «gjennom målet». Hold hele rutinen under 10 sekunder.",
         },
       },
       {
         heading: { en: "A reset routine for mistakes", no: "En nullstillingsrutine for feil" },
         body: {
           en: "Make a second, even shorter routine for after errors: a physical \"delete\" gesture (wipe your hand on your shorts, tap the ground), one breath, one cue for the next play. Practice both routines in training until they're automatic — a routine invented on game day won't hold up.",
-          no: "Lag en ekstra, enda kortere rutine for etter feil: en fysisk «slett»-bevegelse (tørk hånda på shortsen, klapp i bakken), ett pust, ett stikkord for neste aksjon. Øv på begge rutinene på trening til de er automatiske — en rutine du finner på på kampdagen, holder ikke.",
+          no: "Lag en ekstra, enda kortere rutine for etter feil: en fysisk «slett»-bevegelse (tørk hånda på shortsen, klapp i bakken), én pust, ett stikkord for neste aksjon. Øv på begge rutinene på trening til de er automatiske — en rutine du lager først på kampdagen, holder ikke.",
         },
       },
     ],
@@ -484,7 +484,7 @@ export const LESSONS: Lesson[] = [
     minutes: 8,
     intro: {
       en: "Confidence can feel like weather: some days it's there, some days it's gone. But sport psychology treats it differently — as something built from concrete sources you can stack up on purpose. That means low confidence isn't a personality trait. It's a supply problem.",
-      no: "Selvtillit kan føles som vær: noen dager er den der, andre dager er den borte. Men idrettspsykologien behandler den annerledes — som noe som bygges av konkrete kilder du kan stable opp med vilje. Det betyr at lav selvtillit ikke er et personlighetstrekk. Det er et forsyningsproblem.",
+      no: "Selvtillit kan føles som vær: noen dager er den der, andre dager er den borte. Men idrettspsykologien behandler den annerledes — som noe som bygges av konkrete kilder du kan stable opp med vilje. Det betyr at lav selvtillit ikke er et personlighetstrekk. Den mangler bare påfyll — og påfyll kan du skaffe selv.",
     },
     science: {
       en: "The classic theory here is self-efficacy — your belief in your ability to do a specific task. Decades of research show it predicts performance, and that its strongest source is mastery experiences: proof that you've done it (or something close) before. Other sources include watching others succeed, encouragement you trust, and how you read your body's signals.",
@@ -495,7 +495,7 @@ export const LESSONS: Lesson[] = [
         heading: { en: "Collect your proof", no: "Samle bevisene dine" },
         body: {
           en: "Your memory is biased — it replays the misses and forgets the wins. Fight back with a written evidence bank: training sessions where you pushed through, skills that used to be impossible and are now easy, matches where you handled pressure. Before competition, read your bank. This is confidence with receipts.",
-          no: "Hukommelsen din er partisk — den spiller av bommene og glemmer seirene. Slå tilbake med en skriftlig bevisbank: økter der du sto i det, ferdigheter som før var umulige og nå er enkle, kamper der du taklet presset. Les banken din før konkurranse. Dette er selvtillit med kvittering.",
+          no: "Hukommelsen din lurer deg — den spiller av bommene om igjen og glemmer seirene. Slå tilbake med en skriftlig bevisbank: økter der du sto i det, ferdigheter som før var umulige og nå er enkle, kamper der du taklet presset. Les banken din før konkurranse. Dette er selvtillit med kvittering.",
         },
       },
       {
@@ -509,7 +509,7 @@ export const LESSONS: Lesson[] = [
         heading: { en: "Act it, don't fake it", no: "Vis det, ikke lat som" },
         body: {
           en: "Body language talks back to your brain. Shoulders back, head up, walking with purpose — these don't make problems disappear, but they nudge how you feel and how opponents read you. Combine that with your best self-talk lines, and you can act your way into a more confident state even on a shaky day.",
-          no: "Kroppsspråket snakker tilbake til hjernen. Skuldrene tilbake, hodet oppe, målbevisst gange — det får ikke problemer til å forsvinne, men det påvirker hvordan du føler deg og hvordan motstandere leser deg. Kombiner det med de beste selvsnakk-replikkene dine, så kan du handle deg inn i en tryggere tilstand selv på en skjelven dag.",
+          no: "Kroppsspråket snakker tilbake til hjernen. Skuldrene tilbake, hodet oppe, målbevisst gange — det får ikke problemer til å forsvinne, men det påvirker hvordan du føler deg og hvordan motstandere leser deg. Kombiner det med de beste selvsnakkreplikkene dine, så kan du jobbe deg inn i en tryggere tilstand selv på en skjelven dag.",
         },
       },
     ],
@@ -526,7 +526,7 @@ export const LESSONS: Lesson[] = [
       },
       {
         en: "Keep a written evidence bank; read it before you compete.",
-        no: "Før en skriftlig bevisbank; les den før du konkurrerer.",
+        no: "Skriv ned bevisene dine i en bevisbank — og les den før du konkurrerer.",
       },
       {
         en: "Preparation, body language and self-talk all feed the same account.",

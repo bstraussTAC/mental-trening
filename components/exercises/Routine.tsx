@@ -7,7 +7,7 @@ import { useLocalStorage } from "@/lib/progress";
 type StoredRoutine = { moment: string; steps: string[] };
 
 const SUGGESTIONS: L10n[] = [
-  { en: "One calm breath (long exhale)", no: "Ett rolig pust (lang utpust)" },
+  { en: "One calm breath (long exhale)", no: "Én rolig pust (lang utpust)" },
   { en: "Bounce / spin the ball", no: "Sprett / snurr ballen" },
   { en: "Adjust grip or stance", no: "Juster grep eller stilling" },
   { en: "Roll shoulders, release tension", no: "Rull skuldrene, slipp spenningen" },
@@ -29,9 +29,13 @@ export default function Routine() {
   const [saved, setSaved] = useState(false);
 
   const addStep = (step: string) => {
-    if (!step.trim() || stored.steps.length >= MAX_STEPS) return;
+    if (!step.trim()) return;
     setSaved(false);
-    setStored((r) => ({ ...r, steps: [...r.steps, step.trim()] }));
+    setStored((r) =>
+      r.steps.length >= MAX_STEPS
+        ? r
+        : { ...r, steps: [...r.steps, step.trim()] },
+    );
   };
 
   const removeStep = (idx: number) => {
@@ -95,15 +99,17 @@ export default function Routine() {
                 key={`${step}-${i}`}
                 className="flex items-center gap-2 rounded-xl border border-tq-100 px-3 py-2 text-sm animate-fade-up"
               >
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-tq-500 text-xs font-bold text-white">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-tq-600 text-xs font-bold text-white">
                   {i + 1}
                 </span>
-                <span className="flex-1 text-slate-700">{step}</span>
+                <span className="min-w-0 flex-1 break-words text-slate-700">
+                  {step}
+                </span>
                 <button
                   onClick={() => move(i, -1)}
                   disabled={i === 0}
                   aria-label={t({ en: "Move up", no: "Flytt opp" })}
-                  className="px-1 text-slate-400 hover:text-tq-600 disabled:opacity-30"
+                  className="p-2 text-slate-500 hover:text-tq-600 disabled:opacity-30"
                 >
                   ↑
                 </button>
@@ -111,14 +117,14 @@ export default function Routine() {
                   onClick={() => move(i, 1)}
                   disabled={i === stored.steps.length - 1}
                   aria-label={t({ en: "Move down", no: "Flytt ned" })}
-                  className="px-1 text-slate-400 hover:text-tq-600 disabled:opacity-30"
+                  className="p-2 text-slate-500 hover:text-tq-600 disabled:opacity-30"
                 >
                   ↓
                 </button>
                 <button
                   onClick={() => removeStep(i)}
                   aria-label={t({ en: "Remove", no: "Fjern" })}
-                  className="px-1 text-slate-400 hover:text-red-500"
+                  className="p-2 text-slate-500 hover:text-red-600"
                 >
                   ✕
                 </button>
@@ -131,7 +137,10 @@ export default function Routine() {
       {stored.steps.length < MAX_STEPS && (
         <>
           <div className="flex flex-wrap gap-2">
-            {SUGGESTIONS.filter((s) => !stored.steps.includes(s[lang])).map(
+            {SUGGESTIONS.filter(
+              (s) =>
+                !stored.steps.includes(s.en) && !stored.steps.includes(s.no),
+            ).map(
               (s) => (
                 <button
                   key={s.en}
@@ -149,7 +158,7 @@ export default function Routine() {
               value={custom}
               onChange={(e) => setCustom(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "Enter" && !e.nativeEvent.isComposing) {
                   addStep(custom);
                   setCustom("");
                 }
@@ -163,7 +172,8 @@ export default function Routine() {
                 setCustom("");
               }}
               disabled={!custom.trim()}
-              className="rounded-xl bg-tq-500 px-4 text-sm font-semibold text-white hover:bg-tq-600 disabled:opacity-50"
+              aria-label={t({ en: "Add step", no: "Legg til steg" })}
+              className="rounded-xl bg-tq-600 px-4 text-sm font-semibold text-white hover:bg-tq-700 disabled:opacity-50"
             >
               +
             </button>
@@ -174,7 +184,7 @@ export default function Routine() {
       <button
         onClick={() => setSaved(true)}
         disabled={stored.steps.length < 2}
-        className="rounded-full bg-tq-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-tq-600 disabled:opacity-50"
+        className="rounded-full bg-tq-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-tq-700 disabled:opacity-50"
       >
         {saved
           ? t({ en: "Saved ✓ — now drill it in practice", no: "Lagret ✓ — drill den på trening" })

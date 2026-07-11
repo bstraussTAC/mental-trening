@@ -55,17 +55,23 @@ export default function LessonsPage() {
                     ~{lesson.minutes} {t({ en: "min", no: "min" })}
                   </p>
                 </div>
-                <span
-                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
-                    done ? "bg-tq-500 text-white" : "bg-tq-50 text-tq-300"
-                  }`}
-                  aria-label={
-                    done
-                      ? t({ en: "Completed", no: "Fullført" })
-                      : t({ en: "Not completed", no: "Ikke fullført" })
-                  }
-                >
-                  ✓
+                {done ? (
+                  <span
+                    aria-hidden
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-tq-600 text-sm font-bold text-white"
+                  >
+                    ✓
+                  </span>
+                ) : (
+                  <span
+                    aria-hidden
+                    className="h-7 w-7 shrink-0 rounded-full border-2 border-tq-100"
+                  />
+                )}
+                <span className="sr-only">
+                  {done
+                    ? t({ en: "Completed", no: "Fullført" })
+                    : t({ en: "Not completed", no: "Ikke fullført" })}
                 </span>
               </Link>
             </li>

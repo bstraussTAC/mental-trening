@@ -53,7 +53,7 @@ export default function SourcesPage() {
         <p className="rounded-2xl bg-tq-50 px-4 py-3 text-sm text-tq-800">
           {t({
             en: "The evidence library is being assembled — check back soon.",
-            no: "Kildebiblioteket er under sammenstilling — kom tilbake snart.",
+            no: "Kildebiblioteket er under arbeid — kom snart tilbake.",
           })}
         </p>
       ) : (
@@ -75,7 +75,7 @@ export default function SourcesPage() {
                       <p className="text-sm font-semibold leading-snug text-tq-900">
                         {source.title}
                       </p>
-                      <span className="shrink-0 rounded-full bg-tq-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-tq-600">
+                      <span className="shrink-0 rounded-full bg-tq-50 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-tq-700">
                         {t(source.kind)}
                       </span>
                     </div>

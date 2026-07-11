@@ -32,7 +32,7 @@ export default function Confidence() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") add();
+            if (e.key === "Enter" && !e.nativeEvent.isComposing) add();
           }}
           placeholder={t({
             en: "e.g. Kept my cool in the last 5 minutes vs. Lyn",
@@ -43,7 +43,8 @@ export default function Confidence() {
         <button
           onClick={add}
           disabled={!text.trim()}
-          className="rounded-xl bg-tq-500 px-4 text-sm font-semibold text-white hover:bg-tq-600 disabled:opacity-50"
+          aria-label={t({ en: "Add evidence", no: "Legg til bevis" })}
+          className="rounded-xl bg-tq-600 px-4 text-sm font-semibold text-white hover:bg-tq-700 disabled:opacity-50"
         >
           +
         </button>
@@ -76,7 +77,7 @@ export default function Confidence() {
                   className="flex items-start gap-2 rounded-xl border border-tq-100 px-3 py-2.5 text-sm animate-fade-up"
                 >
                   <span aria-hidden>💪</span>
-                  <div className="flex-1">
+                  <div className="min-w-0 flex-1 break-words">
                     <p className="text-slate-700">{entry.text}</p>
                     <p className="text-xs text-slate-400">{entry.date}</p>
                   </div>

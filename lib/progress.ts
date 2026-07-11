@@ -13,7 +13,16 @@ export function useLocalStorage<T>(key: string, initial: T) {
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(key);
-      if (raw !== null) setValue(JSON.parse(raw) as T);
+      if (raw !== null) {
+        const parsed = JSON.parse(raw) as T;
+        // Cheap shape guard: reject values whose basic type no longer
+        // matches (e.g. data written by an older app version).
+        const sameShape =
+          parsed !== null &&
+          typeof parsed === typeof initial &&
+          Array.isArray(parsed) === Array.isArray(initial);
+        if (sameShape) setValue(parsed);
+      }
     } catch {
       // corrupted entry — fall back to the initial value
     }

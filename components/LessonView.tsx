@@ -30,7 +30,7 @@ export default function LessonView({ lessonId }: { lessonId: string }) {
             {lesson.emoji}
           </span>
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-tq-500">
+            <p className="text-xs font-bold uppercase tracking-wide text-tq-600">
               {t({ en: "Lesson", no: "Leksjon" })} {idx + 1} · ~
               {lesson.minutes} {t({ en: "min", no: "min" })}
             </p>
@@ -68,7 +68,7 @@ export default function LessonView({ lessonId }: { lessonId: string }) {
             ))}
           </ul>
         )}
-        <p className="mt-2 text-[11px] text-tq-700/70">
+        <p className="mt-2 text-xs text-tq-700">
           {t({
             en: "Peer-reviewed sources, verified against PubMed/publisher records. Full list under Science.",
             no: "Fagfellevurderte kilder, verifisert mot PubMed/utgiverens registre. Full liste under Forskning.",
@@ -86,7 +86,7 @@ export default function LessonView({ lessonId }: { lessonId: string }) {
       ))}
 
       <section className="rounded-2xl border-2 border-tq-200 p-4">
-        <p className="text-xs font-bold uppercase tracking-wide text-tq-500">
+        <p className="text-xs font-bold uppercase tracking-wide text-tq-600">
           {t({ en: "Exercise", no: "Øvelse" })}
         </p>
         <h2 className="mt-1 text-lg font-bold text-tq-900">
@@ -121,12 +121,12 @@ export default function LessonView({ lessonId }: { lessonId: string }) {
           className={`rounded-full px-6 py-3 font-semibold transition-colors ${
             done
               ? "bg-tq-100 text-tq-700"
-              : "bg-tq-500 text-white hover:bg-tq-600"
+              : "bg-tq-600 text-white hover:bg-tq-700"
           }`}
         >
           {done
             ? t({ en: "Lesson completed ✓", no: "Leksjon fullført ✓" })
-            : t({ en: "Mark lesson complete", no: "Merk leksjon som fullført" })}
+            : t({ en: "Mark lesson complete", no: "Merk leksjonen som fullført" })}
         </button>
         {next ? (
           <Link

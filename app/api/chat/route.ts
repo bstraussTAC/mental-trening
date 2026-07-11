@@ -6,6 +6,26 @@ export const maxDuration = 60;
 
 const MAX_MESSAGES = 30;
 const MAX_MESSAGE_CHARS = 2000;
+// 30 messages × 2000 chars fits comfortably; reject anything bigger early.
+const MAX_BODY_BYTES = 256 * 1024;
+
+// Best-effort per-IP throttle. In-memory state only protects a single
+// long-lived Node process; on serverless platforms add a durable limiter
+// (e.g. Upstash Ratelimit) and ALWAYS set a workspace spend limit for the
+// API key in the Anthropic Console — that's the real circuit breaker.
+const RATE_LIMIT = 20; // requests
+const RATE_WINDOW_MS = 60_000; // per minute
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const windowStart = now - RATE_WINDOW_MS;
+  const recent = (hits.get(ip) ?? []).filter((ts) => ts > windowStart);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 10_000) hits.clear(); // crude memory bound
+  return recent.length > RATE_LIMIT;
+}
 
 type IncomingMessage = { role: "user" | "assistant"; content: string };
 
@@ -44,14 +64,53 @@ function sanitizeMessages(raw: unknown): IncomingMessage[] | null {
   return cleaned;
 }
 
+/** Read the body with a hard byte cap so oversized payloads never reach JSON.parse. */
+async function readBoundedBody(request: Request): Promise<string | null> {
+  const declared = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declared) && declared > MAX_BODY_BYTES) return null;
+  if (!request.body) return "";
+
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > MAX_BODY_BYTES) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+  const merged = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    merged.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(merged);
+}
+
 export async function POST(request: Request) {
   if (!process.env.ANTHROPIC_API_KEY) {
     return Response.json({ error: "not_configured" }, { status: 503 });
   }
 
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
+  if (rateLimited(ip)) {
+    return Response.json({ error: "rate_limited" }, { status: 429 });
+  }
+
+  const rawBody = await readBoundedBody(request);
+  if (rawBody === null) {
+    return Response.json({ error: "payload_too_large" }, { status: 413 });
+  }
+
   let body: unknown;
   try {
-    body = await request.json();
+    body = JSON.parse(rawBody);
   } catch {
     return Response.json({ error: "invalid_json" }, { status: 400 });
   }
@@ -69,7 +128,9 @@ export async function POST(request: Request) {
   const system = buildCoachSystemPrompt(lang === "no" ? "no" : "en");
 
   try {
-    const stream = client.messages.stream({
+    // `stream: true` awaits the HTTP connection, so auth/rate-limit/overload
+    // errors surface here — before we've committed to a 200 response.
+    const upstream = await client.messages.create({
       model: "claude-opus-4-8",
       max_tokens: 1024,
       system: [
@@ -80,22 +141,33 @@ export async function POST(request: Request) {
         },
       ],
       messages,
+      stream: true,
     });
 
     const encoder = new TextEncoder();
     const readable = new ReadableStream<Uint8Array>({
-      start(controller) {
-        stream.on("text", (delta) => {
-          controller.enqueue(encoder.encode(delta));
-        });
-        stream.on("end", () => controller.close());
-        stream.on("error", (err) => {
+      async start(controller) {
+        try {
+          for await (const event of upstream) {
+            if (
+              event.type === "content_block_delta" &&
+              event.delta.type === "text_delta"
+            ) {
+              controller.enqueue(encoder.encode(event.delta.text));
+            }
+          }
+          controller.close();
+        } catch (err) {
           console.error("chat stream error:", err);
-          controller.error(err);
-        });
+          try {
+            controller.error(err);
+          } catch {
+            // controller already closed/errored
+          }
+        }
       },
       cancel() {
-        stream.abort();
+        upstream.controller.abort();
       },
     });
 

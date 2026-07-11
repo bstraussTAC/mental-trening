@@ -34,6 +34,8 @@ npm run dev
 
 Open http://localhost:3000. The app works without an API key — the chat page will just show a "coach not connected" notice until `ANTHROPIC_API_KEY` is set.
 
+**Before deploying publicly:** the chat endpoint has basic per-IP throttling and payload caps built in, but the in-memory limiter only protects a single long-lived server. On serverless platforms add a durable rate limiter (e.g. Upstash Ratelimit), and in every case **set a workspace spend limit for the API key in the Anthropic Console** — that's the reliable circuit breaker against abuse.
+
 ## Tech
 
 - Next.js (App Router) + TypeScript + Tailwind CSS 4

@@ -106,7 +106,7 @@ export default function Goals() {
       ))}
       <button
         onClick={save}
-        className="rounded-full bg-tq-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-tq-600"
+        className="rounded-full bg-tq-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-tq-700"
       >
         {saved
           ? t({ en: "Saved ✓", no: "Lagret ✓" })

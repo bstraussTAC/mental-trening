@@ -11,8 +11,9 @@
   --tq-300: #54ddd0;
   --tq-400: #26c4b9;
   --tq-500: #0da8a0;
-  --tq-600: #078782;
-  --tq-700: #0a6c69;
+  /* 600/700 tuned so white text passes WCAG AA (5.5:1 / 7.8:1) */
+  --tq-600: #0b7570;
+  --tq-700: #095c58;
   --tq-800: #0c5654;
   --tq-900: #0f4746;
 }
@@ -76,4 +77,14 @@ body {
 
 .animate-fade-up {
   animation: fade-up 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-fade-up,
+  .animate-bounce {
+    animation: none;
+  }
 }
